@@ -40,7 +40,7 @@ app.post('/send-email', (req, res) => {
       console.log('Error sending email:', error);  // Log the error if any
       return res.status(500).send('Error sending email');
     } else {
-      console.log('Email sent: ' + info.response);  // Log the success if email sent
+      console.log('Check Your Mail:');  // Log the success if email sent
       return res.status(200).send('Email sent successfully!');
     }
   });
