@@ -11,12 +11,18 @@
             text-align: center;
             padding: 80px 20px; /* More padding on top */
             overflow: hidden;
+            position: relative;
+            background-image: url('https://example.com/rose-image.png'); /* Add a link to a rose image */
+            background-repeat: no-repeat;
+            background-size: 100px 100px;  /* Adjust the size of the rose images */
+            background-position: center;
+            background-attachment: fixed;
         }
         h1 {
             color: #b30000; /* Dark red color for the header */
         }
         button {
-            padding: 24px 50px;
+            padding: 12px 25px;
             font-size: 18px;
             background-color: #b30000; /* Dark red button */
             color: white;
@@ -31,7 +37,7 @@
         .balloon {
             position: absolute;
             bottom: -100px;  /* Start below the screen */
-            animation: floatUp 6s ease-in infinite;
+            animation: floatUp 5s ease-in infinite;
             width: 50px;
             height: 70px;
             background-color: #ff3333; /* Red balloon color */
@@ -47,6 +53,29 @@
             100% {
                 bottom: 100vh;  /* Move balloons to the top of the screen */
                 transform: translateX(calc(50px * (1 - 2 * random())));
+            }
+        }
+
+        /* Rose background design */
+        .rose {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://example.com/rose-image.png'); /* Link to a rose image */
+            background-size: cover;
+            animation: moveRose 10s linear infinite;
+        }
+
+        @keyframes moveRose {
+            0% {
+                top: -50px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            100% {
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     </style>
@@ -85,12 +114,12 @@
             });
         });
 
-        // Function to generate multiple balloons and animate them
+        // Function to generate 150 balloons and animate them
         function floatBalloons() {
             const container = document.getElementById('balloonsContainer');
 
-            // Create 50 balloons each time button is clicked
-            for (let i = 0; i < 50; i++) {
+            // Create 150 balloons each time button is clicked
+            for (let i = 0; i < 150; i++) {
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
 
@@ -104,6 +133,19 @@
                 setTimeout(() => {
                     balloon.remove();
                 }, 5000);  // Same time as animation duration
+            }
+
+            // Add roses to the background (50 roses)
+            for (let i = 0; i < 50; i++) {
+                const rose = document.createElement('div');
+                rose.classList.add('rose');
+
+                // Set random positions for roses
+                rose.style.left = `${Math.random() * 100}%`;
+                rose.style.top = `${Math.random() * 100}%`;
+
+                // Add each rose to the body
+                document.body.appendChild(rose);
             }
         }
     </script>
