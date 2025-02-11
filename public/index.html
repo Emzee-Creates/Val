@@ -7,24 +7,24 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #ffcccc; /* Redder background */
             text-align: center;
-            padding: 50px;
+            padding: 80px 20px; /* More padding on top */
             overflow: hidden;
         }
         h1 {
-            color: #ff69b4; /* Pink color */
+            color: #b30000; /* Dark red color for the header */
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 18px;
-            background-color: #ff69b4;
+            background-color: #b30000; /* Dark red button */
             color: white;
             border: none;
             cursor: pointer;
         }
         button:hover {
-            background-color: #ff1493;
+            background-color: #990000; /* Lighter red on hover */
         }
 
         /* Balloon styles */
@@ -34,10 +34,9 @@
             animation: floatUp 5s ease-in infinite;
             width: 50px;
             height: 70px;
-            background-color: #ff69b4;
+            background-color: #ff3333; /* Red balloon color */
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            animation-duration: 5s;
         }
 
         @keyframes floatUp {
@@ -65,7 +64,7 @@
             // Change the button text
             this.textContent = "Check your Email! 😉";
 
-            // Trigger floating balloons
+            // Trigger floating balloons (multiple)
             floatBalloons();
 
             // Send the email request
@@ -86,24 +85,26 @@
             });
         });
 
-        // Function to generate balloons and animate them
+        // Function to generate multiple balloons and animate them
         function floatBalloons() {
             const container = document.getElementById('balloonsContainer');
 
-            // Create a balloon element
-            const balloon = document.createElement('div');
-            balloon.classList.add('balloon');
+            // Create 5 balloons each time button is clicked
+            for (let i = 0; i < 5; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
 
-            // Set a random horizontal position for the balloon
-            balloon.style.left = `${Math.random() * 100}%`;
+                // Set a random horizontal position for each balloon
+                balloon.style.left = `${Math.random() * 100}%`;
 
-            // Append the balloon to the container
-            container.appendChild(balloon);
+                // Append the balloon to the container
+                container.appendChild(balloon);
 
-            // Remove the balloon after the animation ends (5 seconds)
-            setTimeout(() => {
-                balloon.remove();
-            }, 5000);  // Same time as animation duration
+                // Remove the balloon after the animation ends (5 seconds)
+                setTimeout(() => {
+                    balloon.remove();
+                }, 5000);  // Same time as animation duration
+            }
         }
     </script>
 </body>
