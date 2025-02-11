@@ -32,16 +32,17 @@ app.post('/send-email', (req, res) => {
     text: 'Sending you lots of love on this special day Eriife! 💖',
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
+   transporter.sendMail(mailOptions, (error, info) => {
+    // This will run regardless of success or failure:
+    console.log("Check your mail");
+
     if (error) {
-      console.log('Error sending email:', error);  // Log only if there's an error
+      console.log('Error sending email:', error);  // Log the error if any
       return res.status(500).send('Error sending email');
     } else {
-      console.log('Email sent: ' + info.response);  // Log success only if email is sent successfully
+      console.log('Email sent: ' + info.response);  // Log the success if email sent
       return res.status(200).send('Email sent successfully!');
     }
-    console.log("Check your mail😉")
-    return res.status(200).send('Email Attempt Made!')
   });
 });
 // Start the server
