@@ -5,156 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Valentine's Day!</title>
     <style>
+        /* Set a soft pink gradient background */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Dancing Script', cursive;
             text-align: center;
             padding: 80px 20px;
+            background: linear-gradient(45deg, #ff7eb9, #ff65a3, #ff4b7e);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #fff;
             overflow: hidden;
             position: relative;
-            background-image: url('roses.png'); /* Local image */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
         }
 
+        /* Gradient animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Romantic heading */
         h1 {
-            color: #b30000; /* Dark red color for the header */
+            color: #ff4b7e; /* Soft pink/red color for the header */
+            font-size: 50px;
+            margin-bottom: 10px;
         }
 
+        p {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        /* Button styling */
         button {
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 18px;
-            background-color: #b30000; /* Dark red button */
+            background-color: #ff4b7e;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 30px;
+            font-family: 'Dancing Script', cursive;
+            transition: all 0.3s ease;
         }
 
         button:hover {
-            background-color: #990000; /* Lighter red on hover */
+            background-color: #ff7eb9;
+            transform: scale(1.1);
         }
 
-        /* Balloon styles */
-        .balloon {
+        /* Heart animation styles */
+        .heart {
             position: absolute;
-            bottom: -100px;  /* Start below the screen */
-            width: 50px;
-            height: 70px;
-            background-color: #ff3333; /* Red balloon color */
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            animation: floatUp 5s ease-in forwards;  /* Forward makes sure they stop at the top */
+            bottom: -50px;
+            width: 60px;
+            height: 60px;
+            background-color: #ff4b7e;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: floatHearts 5s ease-in-out infinite;
+            opacity: 0.8;
         }
 
-        /* Balloon floating animation */
-        @keyframes floatUp {
+        /* Heart floating animation */
+        @keyframes floatHearts {
             0% {
-                bottom: -100px;
-                transform: translateX(0);
+                bottom: -50px;
+                transform: rotate(0deg);
             }
             100% {
-                bottom: 100vh;  /* Move balloons to the top of the screen */
-                transform: translateX(calc(50px * (1 - 2 * random())));
+                bottom: 100vh;
+                transform: rotate(360deg);
+                opacity: 0;
             }
         }
 
-        /* Rose background design */
-        .rose {
-            position: absolute;
+        /* Position hearts randomly */
+        .heart:nth-child(even) {
+            animation-duration: 6s;
+        }
+
+        /* Add floating hearts in different sizes */
+        .heart:nth-child(odd) {
             width: 50px;
             height: 50px;
-            background-image: url('rose.png'); /* Local image */
-            background-size: cover;
-            animation: moveRose 10s linear infinite;
-        }
-
-        @keyframes moveRose {
-            0% {
-                top: -50px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            100% {
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-            }
+            animation-duration: 7s;
         }
 
     </style>
 </head>
 <body>
     <h1>Happy Valentine's Day Eriife!</h1>
-    <p>Korede Loves you</p>
+    <p>Korede Loves you 💖</p>
     <button id="sendEmailBtn">Click Me 💖</button>
 
-    <!-- Balloons container -->
-    <div id="balloonsContainer"></div>
+    <!-- Floating hearts container -->
+    <div id="heartsContainer"></div>
 
     <script>
         document.getElementById('sendEmailBtn').addEventListener('click', function() {
             // Change the button text
             this.textContent = "Check your Email! 😉";
 
-            // Trigger floating balloons (one by one)
-            floatBalloons();
-
-            // Send the email request
-            fetch('/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: 'Sending lots of love on this special day! 💖' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Email sent successfully!');
-            })
-            .catch((error) => {
-                alert('Error sending email.');
-                console.error('Error:', error);
-            });
+            // Trigger floating hearts
+            floatHearts();
         });
 
-        // Function to generate 150 balloons and animate them one by one
-        function floatBalloons() {
-            const container = document.getElementById('balloonsContainer');
+        // Function to create floating hearts
+        function floatHearts() {
+            const container = document.getElementById('heartsContainer');
 
-            // Create 150 balloons each time button is clicked
-            for (let i = 0; i < 150; i++) {
-                setTimeout(() => {
-                    const balloon = document.createElement('div');
-                    balloon.classList.add('balloon');
-
-                    // Set a random horizontal position for each balloon
-                    balloon.style.left = `${Math.random() * 100}%`;
-
-                    // Stagger the balloon animation by using a delay
-                    balloon.style.animationDelay = `${i * 0.1}s`;  // Delay each balloon's animation
-
-                    // Append the balloon to the container
-                    container.appendChild(balloon);
-
-                    // Remove the balloon after the animation ends (5 seconds)
-                    setTimeout(() => {
-                        balloon.remove();
-                    }, 5000);  // Same time as animation duration
-                }, i * 100);  // Add delay between balloon creations
-            }
-
-            // Add roses to the background (50 roses)
+            // Create 50 hearts each time the button is clicked
             for (let i = 0; i < 50; i++) {
-                const rose = document.createElement('div');
-                rose.classList.add('rose');
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
 
-                // Set random positions for roses
-                rose.style.left = `${Math.random() * 100}%`;
-                rose.style.top = `${Math.random() * 100}%`;
+                // Set a random horizontal position for each heart
+                heart.style.left = `${Math.random() * 100}%`;
 
-                // Add each rose to the body
-                document.body.appendChild(rose);
+                // Append the heart to the container
+                container.appendChild(heart);
+
+                // Remove the heart after it completes the animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);  // Same time as animation duration
             }
         }
     </script>
