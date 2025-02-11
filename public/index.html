@@ -56,24 +56,37 @@
             transform: scale(1.1);
         }
 
-        /* Balloon animation styles */
+        /* Balloon styling */
         .balloon {
             position: absolute;
-            bottom: -50px;
-            width: 50px;
-            height: 70px;
+            bottom: -70px;  /* Start below the screen */
+            width: 60px;
+            height: 80px;
             background-color: #ff4b7e;
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            animation: floatBalloons 5s ease-in-out infinite;
-            opacity: 0.8;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            animation: floatBalloons 6s ease-in forwards; /* Floating animation */
+            opacity: 0.9;
+        }
+
+        /* Balloon string */
+        .balloon:after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 60px;
+            background-color: #3b3b3b; /* Balloon string color */
+            transform: translateX(-50%);
         }
 
         /* Balloon floating animation */
         @keyframes floatBalloons {
             0% {
-                bottom: -50px;
+                bottom: -70px;
                 transform: translateX(0);
+                opacity: 1;
             }
             100% {
                 bottom: 100vh;
@@ -84,14 +97,14 @@
 
         /* Stagger animation timing for each balloon */
         .balloon:nth-child(even) {
-            animation-duration: 6s;
+            animation-duration: 7s;
         }
 
-        /* Add floating balloons in different sizes */
+        /* Floating balloons in different sizes and shapes */
         .balloon:nth-child(odd) {
-            width: 45px;
-            height: 65px;
-            animation-duration: 7s;
+            width: 55px;
+            height: 75px;
+            animation-duration: 8s;
         }
     </style>
 </head>
@@ -147,7 +160,7 @@
                 // Remove the balloon after it completes the animation
                 setTimeout(() => {
                     balloon.remove();
-                }, 5000);  // Same time as animation duration
+                }, 6000);  // Same time as animation duration
             }
         }
     </script>
