@@ -62,11 +62,12 @@
             bottom: -70px;  /* Start below the screen */
             width: 60px;
             height: 80px;
-            background-color: #ff4b7e;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-            animation: floatBalloons 6s ease-in forwards; /* Floating animation */
+            background: linear-gradient(135deg, #ff5e62, #ff9966); /* Gradient for realistic balloon color */
+            border-radius: 50%; /* Rounded shape */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5); /* Shading for depth */
+            animation: floatBalloons 6s ease-in-out forwards; /* Floating animation */
             opacity: 0.9;
+            transform-origin: bottom center; /* To rotate from bottom */
         }
 
         /* Balloon string */
@@ -85,12 +86,12 @@
         @keyframes floatBalloons {
             0% {
                 bottom: -70px;
-                transform: translateX(0);
+                transform: translateX(0) rotate(0deg);
                 opacity: 1;
             }
             100% {
                 bottom: 100vh;
-                transform: translateX(calc(50px * (1 - 2 * random())));
+                transform: translateX(calc(50px * (1 - 2 * random()))) rotate(calc(30deg * (1 - 2 * random())));
                 opacity: 0;
             }
         }
@@ -153,6 +154,9 @@
 
                 // Set a random horizontal position for each balloon
                 balloon.style.left = `${Math.random() * 100}%`;
+
+                // Set a random delay for each balloon to stagger the animation
+                balloon.style.animationDelay = `${Math.random() * 2}s`;
 
                 // Append the balloon to the container
                 container.appendChild(balloon);
