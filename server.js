@@ -30,10 +30,6 @@ app.post('/send-email', (req, res) => {
     to: 'emmanuelemoruwa356@gmail.com', // Replace with recipient's email
     subject: 'Happy Valentine\'s Day!',
     text: 'Sending you lots of love on this special day Eriife! 💖',
-    attachments: [
-      {
-      }
-    ]
   };
 
    transporter.sendMail(mailOptions, (error, info) => {
