@@ -12,15 +12,16 @@
             padding: 80px 20px; /* More padding on top */
             overflow: hidden;
             position: relative;
-            background-image: url('roses.png'); /* Add a link to a rose image */
-            background-repeat: no-repeat;
-            background-size: 100px 100px;  /* Adjust the size of the rose images */
+            background-image: url('roses.png'); /* Local image */
+            background-size: cover; /* Ensures the background covers the screen */
             background-position: center;
             background-attachment: fixed;
         }
+
         h1 {
             color: #b30000; /* Dark red color for the header */
         }
+
         button {
             padding: 12px 25px;
             font-size: 18px;
@@ -29,6 +30,7 @@
             border: none;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #990000; /* Lighter red on hover */
         }
@@ -37,14 +39,15 @@
         .balloon {
             position: absolute;
             bottom: -100px;  /* Start below the screen */
-            animation: floatUp 5s ease-in infinite;
             width: 50px;
             height: 70px;
             background-color: #ff3333; /* Red balloon color */
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            animation: floatUp 5s ease-in forwards;  /* Forward makes sure they stop at the top */
         }
 
+        /* Balloon floating animation */
         @keyframes floatUp {
             0% {
                 bottom: -100px;
@@ -61,7 +64,7 @@
             position: absolute;
             width: 50px;
             height: 50px;
-            background-image: url('https://example.com/rose-image.png'); /* Link to a rose image */
+            background-image: url('rose.png'); /* Local image */
             background-size: cover;
             animation: moveRose 10s linear infinite;
         }
@@ -78,6 +81,7 @@
                 transform: translateX(-50%);
             }
         }
+
     </style>
 </head>
 <body>
@@ -93,7 +97,7 @@
             // Change the button text
             this.textContent = "Check your Email! 😉";
 
-            // Trigger floating balloons (multiple)
+            // Trigger floating balloons (one by one)
             floatBalloons();
 
             // Send the email request
@@ -114,7 +118,7 @@
             });
         });
 
-        // Function to generate 150 balloons and animate them
+        // Function to generate 150 balloons and animate them one by one
         function floatBalloons() {
             const container = document.getElementById('balloonsContainer');
 
@@ -125,6 +129,9 @@
 
                 // Set a random horizontal position for each balloon
                 balloon.style.left = `${Math.random() * 100}%`;
+
+                // Stagger the balloon animation by using a delay
+                balloon.style.animationDelay = `${i * 0.5}s`;  // Delay each balloon's animation
 
                 // Append the balloon to the container
                 container.appendChild(balloon);
