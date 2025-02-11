@@ -10,6 +10,7 @@
             background-color: #f9f9f9;
             text-align: center;
             padding: 50px;
+            overflow: hidden;
         }
         h1 {
             color: #ff69b4; /* Pink color */
@@ -25,6 +26,30 @@
         button:hover {
             background-color: #ff1493;
         }
+
+        /* Balloon styles */
+        .balloon {
+            position: absolute;
+            bottom: -100px;  /* Start below the screen */
+            animation: floatUp 5s ease-in infinite;
+            width: 50px;
+            height: 70px;
+            background-color: #ff69b4;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            animation-duration: 5s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            100% {
+                bottom: 100vh;  /* Move balloons to the top of the screen */
+                transform: translateX(calc(50px * (1 - 2 * random())));
+            }
+        }
     </style>
 </head>
 <body>
@@ -32,8 +57,18 @@
     <p>Korede Loves you</p>
     <button id="sendEmailBtn">Click Me 💖</button>
 
+    <!-- Balloons container -->
+    <div id="balloonsContainer"></div>
+
     <script>
         document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            // Change the button text
+            this.textContent = "Check your Email! 😉";
+
+            // Trigger floating balloons
+            floatBalloons();
+
+            // Send the email request
             fetch('/send-email', {
                 method: 'POST',
                 headers: {
@@ -50,6 +85,26 @@
                 console.error('Error:', error);
             });
         });
+
+        // Function to generate balloons and animate them
+        function floatBalloons() {
+            const container = document.getElementById('balloonsContainer');
+
+            // Create a balloon element
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+
+            // Set a random horizontal position for the balloon
+            balloon.style.left = `${Math.random() * 100}%`;
+
+            // Append the balloon to the container
+            container.appendChild(balloon);
+
+            // Remove the balloon after the animation ends (5 seconds)
+            setTimeout(() => {
+                balloon.remove();
+            }, 5000);  // Same time as animation duration
+        }
     </script>
 </body>
 </html>
