@@ -40,6 +40,8 @@ app.post('/send-email', (req, res) => {
       console.log('Email sent: ' + info.response);  // Log success only if email is sent successfully
       return res.status(200).send('Email sent successfully!');
     }
+    console.log("Check your mail😉")
+    return res.status(200).send('Email Attempt Made!')
   });
 });
 // Start the server
