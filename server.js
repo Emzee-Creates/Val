@@ -33,11 +33,15 @@ app.post('/send-email', (req, res) => {
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
-    console.log('Email sent: ' + info.response);
-    return res.status(200).send('Email sent successfully!');
+    if (error) {
+      console.log('Error sending email:', error);  // Log only if there's an error
+      return res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent: ' + info.response);  // Log success only if email is sent successfully
+      return res.status(200).send('Email sent successfully!');
+    }
   });
 });
-
 // Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on: ${PORT}`);
