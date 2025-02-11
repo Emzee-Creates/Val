@@ -1,4 +1,4 @@
-const express = require('express');
+n const express = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
 
@@ -41,7 +41,7 @@ app.post('/send-email', (req, res) => {
 
    transporter.sendMail(mailOptions, (error, info) => {
     // This will run regardless of success or failure:
-    console.log("Check your mail");
+    return res.status().send('Check your Mail!');
 
     if (error) {
       console.log('Error sending email:', error);  // Log the error if any
