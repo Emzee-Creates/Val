@@ -16,7 +16,7 @@
             color: #b30000; /* Dark red color for the header */
         }
         button {
-            padding: 12px 25px;
+            padding: 24px 50px;
             font-size: 18px;
             background-color: #b30000; /* Dark red button */
             color: white;
@@ -31,7 +31,7 @@
         .balloon {
             position: absolute;
             bottom: -100px;  /* Start below the screen */
-            animation: floatUp 5s ease-in infinite;
+            animation: floatUp 6s ease-in infinite;
             width: 50px;
             height: 70px;
             background-color: #ff3333; /* Red balloon color */
@@ -89,8 +89,8 @@
         function floatBalloons() {
             const container = document.getElementById('balloonsContainer');
 
-            // Create 5 balloons each time button is clicked
-            for (let i = 0; i < 5; i++) {
+            // Create 50 balloons each time button is clicked
+            for (let i = 0; i < 50; i++) {
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
 
