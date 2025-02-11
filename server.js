@@ -25,7 +25,7 @@ const transporter = nodemailer.createTransport({
 
 // Route to send email
 app.post('/send-email', (req, res) => {
-  const attachmentPath = 'C:\\Users\\User\\Downloads\\Kung Fu Panda (2008)\\test.txt'
+  const attachmentPath = 'C:\\Users\\User\\Downloads\\test.txt'
   const mailOptions = {
     from: process.env.MAIL_USER,
     to: 'emmanuelemoruwa356@gmail.com', // Replace with recipient's email
@@ -33,7 +33,7 @@ app.post('/send-email', (req, res) => {
     text: 'Sending you lots of love on this special day Eriife! 💖',
     attachments: [
       {
-        filename: 'open_me.txt',
+        filename: 'test.txt',
         path: attachmentPath
       }
     ]
