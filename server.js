@@ -18,15 +18,15 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,  // Use TLS
   auth: {
-    user: 'emmanuelemoruwa356@gmail.com',  // Replace with your email
-    pass: 'syra vgcm rklv ufku',   // Replace with your email password (Use App Password if 2FA is enabled)
+    user: process.env.EMAIL_USER ,  // Replace with your email
+    pass: process.env.EMAIL_PASS,   // Replace with your email password (Use App Password if 2FA is enabled)
   },
 });
 
 // Route to send email
 app.post('/send-email', (req, res) => {
   const mailOptions = {
-    from: 'emmanuelemoruwa356@gmail.com',
+    from: process.env.MAIL_USER,
     to: 'emmanuelemoruwa356@gmail.com', // Replace with recipient's email
     subject: 'Happy Valentine\'s Day!',
     text: 'Sending you lots of love on this special day! 💖',
