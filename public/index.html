@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #ff69b4; /* Pink color */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine's Day Eriife!</h1>
+    <p>Korede Loves you</p>
+    <button id="sendEmailBtn">Click Me 💖</button>
+
+    <script>
+        document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: 'Sending lots of love on this special day! 💖' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Email sent successfully!');
+            })
+            .catch((error) => {
+                alert('Error sending email.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
