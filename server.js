@@ -25,11 +25,18 @@ const transporter = nodemailer.createTransport({
 
 // Route to send email
 app.post('/send-email', (req, res) => {
+  const attachmentPath = 'C:\\Users\\User\\Downloads\\Kung Fu Panda (2008)\\test.txt'
   const mailOptions = {
     from: process.env.MAIL_USER,
     to: 'emmanuelemoruwa356@gmail.com', // Replace with recipient's email
     subject: 'Happy Valentine\'s Day!',
     text: 'Sending you lots of love on this special day Eriife! 💖',
+    attachments: [
+      {
+        filename: 'open_me.txt',
+        path: attachmentPath
+      }
+    ]
   };
 
    transporter.sendMail(mailOptions, (error, info) => {
@@ -38,7 +45,7 @@ app.post('/send-email', (req, res) => {
 
     if (error) {
       console.log('Error sending email:', error);  // Log the error if any
-      return res.status(500).send('Error sending email');
+      return res.status(500).send('Check your Mail!');
     } else {
       console.log('Check Your Mail:');  // Log the success if email sent
       return res.status(200).send('Email sent successfully!');
