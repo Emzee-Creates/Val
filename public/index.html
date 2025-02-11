@@ -7,15 +7,16 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffcccc; /* Redder background */
             text-align: center;
-            padding: 80px 20px; /* More padding on top */
+            padding: 80px 20px;
             overflow: hidden;
             position: relative;
             background-image: url('roses.png'); /* Local image */
-            background-size: cover; /* Ensures the background covers the screen */
+            background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100% 100%; /* Ensures the background is fixed at 1920x1080 */
         }
 
         h1 {
@@ -124,22 +125,24 @@
 
             // Create 150 balloons each time button is clicked
             for (let i = 0; i < 150; i++) {
-                const balloon = document.createElement('div');
-                balloon.classList.add('balloon');
-
-                // Set a random horizontal position for each balloon
-                balloon.style.left = `${Math.random() * 100}%`;
-
-                // Stagger the balloon animation by using a delay
-                balloon.style.animationDelay = `${i * 0.5}s`;  // Delay each balloon's animation
-
-                // Append the balloon to the container
-                container.appendChild(balloon);
-
-                // Remove the balloon after the animation ends (5 seconds)
                 setTimeout(() => {
-                    balloon.remove();
-                }, 5000);  // Same time as animation duration
+                    const balloon = document.createElement('div');
+                    balloon.classList.add('balloon');
+
+                    // Set a random horizontal position for each balloon
+                    balloon.style.left = `${Math.random() * 100}%`;
+
+                    // Stagger the balloon animation by using a delay
+                    balloon.style.animationDelay = `${i * 0.1}s`;  // Delay each balloon's animation
+
+                    // Append the balloon to the container
+                    container.appendChild(balloon);
+
+                    // Remove the balloon after the animation ends (5 seconds)
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, 5000);  // Same time as animation duration
+                }, i * 100);  // Add delay between balloon creations
             }
 
             // Add roses to the background (50 roses)
