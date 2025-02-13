@@ -62,12 +62,12 @@
             bottom: -70px;  /* Start below the screen */
             width: 60px;
             height: 80px;
-            background: linear-gradient(135deg, #ff5e62, #ff9966); /* Gradient for realistic balloon color */
             border-radius: 50%; /* Rounded shape */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5); /* Shading for depth */
             animation: floatBalloons 6s ease-in-out forwards; /* Floating animation */
             opacity: 0.9;
             transform-origin: bottom center; /* To rotate from bottom */
+            cursor: pointer; /* Make it clickable for popping */
         }
 
         /* Balloon string */
@@ -120,7 +120,7 @@
     <script>
         document.getElementById('sendEmailBtn').addEventListener('click', function() {
             // Change the button text
-            this.textContent = "Check your Email! 😉";
+            this.textContent = "Check your Email in One Minute! 😉";
 
             // Trigger floating balloons
             floatBalloons();
@@ -146,11 +146,15 @@
         // Function to create floating balloons
         function floatBalloons() {
             const container = document.getElementById('balloonsContainer');
+            const balloonColors = ['#ff5e62', '#ff9966', '#ff4b7e', '#ffffff', '#99ccff']; // Colors: Red, Pink, White, Blue
 
             // Create 50 balloons each time the button is clicked
             for (let i = 0; i < 50; i++) {
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
+
+                // Random color assignment for each balloon
+                balloon.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
 
                 // Set a random horizontal position for each balloon
                 balloon.style.left = `${Math.random() * 100}%`;
@@ -165,6 +169,11 @@
                 setTimeout(() => {
                     balloon.remove();
                 }, 6000);  // Same time as animation duration
+
+                // Add event listener for "pop" effect (balloon disappears on click)
+                balloon.addEventListener('click', function() {
+                    balloon.remove(); // Remove the balloon when clicked
+                });
             }
         }
     </script>
