@@ -30,7 +30,7 @@ app.post('/send-email', (req, res) => {
   
   const mailOptions = {
     from: process.env.MAIL_USER,
-    to: 'emmanuelemoruwa356@gmail.com', // Replace with recipient's email
+    to: 'Eriifeoluwa.adeyemo@gmail.com', // Replace with recipient's email
     subject: 'Happy Valentine\'s Day!',
     text: `I would have loved to buy you thousands of flowers and a million boxes of chocolates and take you to the fanciest of restaurants for dinner on this special day, unfortunately, I can't. What I CAN do is remind you of how special you are to me.
 
