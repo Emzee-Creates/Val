@@ -1,3 +1,6 @@
+Sure! I've added the text "P.S. You can pop the balloons 😂" after the button is clicked. Here's the updated code:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,12 +110,23 @@
             height: 75px;
             animation-duration: 8s;
         }
+
+        /* Text for popping instruction */
+        #popInstruction {
+            font-size: 18px;
+            color: #fff;
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
     </style>
 </head>
 <body>
     <h1>Happy Valentine's Day Eriife!</h1>
     <p>Korede Loves you 💖</p>
     <button id="sendEmailBtn">Click Me 💖</button>
+
+    <!-- Instruction Text -->
+    <p id="popInstruction">P.S. You can pop the balloons 😂</p>
 
     <!-- Balloons container -->
     <div id="balloonsContainer"></div>
@@ -121,6 +135,9 @@
         document.getElementById('sendEmailBtn').addEventListener('click', function() {
             // Change the button text
             this.textContent = "Check your Email in One Minute! 😉";
+
+            // Show the "You can pop the balloons" text
+            document.getElementById('popInstruction').style.display = 'block';
 
             // Trigger floating balloons
             floatBalloons();
